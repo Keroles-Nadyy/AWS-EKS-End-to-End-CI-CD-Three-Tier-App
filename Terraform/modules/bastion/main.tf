@@ -1,7 +1,7 @@
 resource "aws_instance" "bastion_instance" {
   ami                    = "ami-0360c520857e3138f"
   instance_type          = "t2.micro"
-  subnet_id              = var.subnets_details["public_subnet_I"]
+  subnet_id              = var.subnets_details["public_subnet_I"].id
   vpc_security_group_ids = [var.bastion_sg_id]
   key_name               = aws_key_pair.bastion_key.key_name
 
