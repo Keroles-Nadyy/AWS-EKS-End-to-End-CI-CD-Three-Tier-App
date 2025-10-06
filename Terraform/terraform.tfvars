@@ -1,6 +1,6 @@
 vpc_cidr = "10.0.0.0/16"
 region               = "us-east-1"
-common_resource_name = "ToDo_NodeJs_App"
+common_resource_name = "ToDo-NodeJs-App"
 
 subnets_details = {
   "public_subnet_I" : { name = "public_subnet_I", cidr = "10.0.1.0/24", type = "public", az = "us-east-1a" },
@@ -17,9 +17,9 @@ cluster_version                = "1.33"
 endpoint_private_access        = true
 endpoint_public_access         = false
 instance_types                 = "t2.large"
-desired_capacity               = 1
+desired_capacity               = 2
 min_capacity                   = 1
-max_capacity                   = 3
+max_capacity                   = 5
 
 addons = [
   {
