@@ -1,0 +1,3 @@
+[jenkins-slave]
+34.235.155.67 ansible_user=ubuntu
+

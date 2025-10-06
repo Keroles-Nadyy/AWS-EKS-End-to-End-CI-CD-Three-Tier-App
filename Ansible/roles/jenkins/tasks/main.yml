@@ -1,0 +1,51 @@
+- name: Create directory for Jenkins
+  file:
+    path: ~/jenkins-workspace
+    state: directory
+  register: jenkins_dir
+
+- name: print out jenkins_dir
+  debug:
+    msg: "Jenkins directory created at {{ jenkins_dir.path }}"
+
+- name: Update apt package
+  apt:
+    update_cache: yes
+
+- name: Install Java 21
+  apt:
+    name: openjdk-21-jre
+    state: present
+
+- name: Install dependencies
+  apt:
+    name:
+      - fontconfig
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg2
+      - software-properties-common
+    state: present
+
+
+- name: Download Jenkins keyring
+  get_url:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    dest: /etc/apt/keyrings/jenkins-keyring.asc
+    mode: '0644'
+
+- name: Add Jenkins repository to apt sources
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
+    filename: jenkins
+    state: present
+
+- name: Update apt package
+  apt:
+    update_cache: yes
+
+- name: Install Jenkins
+  apt:
+    name: jenkins
+    state: present
